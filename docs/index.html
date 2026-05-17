@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONEY — Survival Horror</title>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --deep: #04040a;
+    --dark: #0a0812;
+    --panel: #0f0b1a;
+    --purple: #2a0a4a;
+    --purple-mid: #4a1a7a;
+    --purple-bright: #7a3abf;
+    --blue-dark: #060d1f;
+    --blue-mid: #0d2040;
+    --blue-accent: #1a3a7a;
+    --gold: #c8a94a;
+    --gold-dim: #8a7030;
+    --green-money: #1a4a1a;
+    --green-bright: #2a7a2a;
+    --text: #d4c8e8;
+    --muted: #7a6a9a;
+    --blood: #5a0a0a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* FLOATING BILLS */
+  .bills-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bill {
+    position: absolute;
+    width: 90px;
+    height: 40px;
+    background: linear-gradient(135deg, #1a4a1a 0%, #0d2d0d 50%, #1a4a1a 100%);
+    border: 1px solid #2a7a2a44;
+    border-radius: 3px;
+    opacity: 0;
+    animation: fallBill linear infinite;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Special Elite', serif;
+    font-size: 9px;
+    color: #2a7a2a88;
+    letter-spacing: 2px;
+  }
+
+  .bill::before {
+    content: '$ 100 $';
+    position: absolute;
+  }
+
+  .bill::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid #2a7a2a33;
+    border-radius: 2px;
+  }
+
+  @keyframes fallBill {
+    0%   { opacity: 0; transform: translateY(-80px) rotate(var(--rot)) translateX(0); }
+    10%  { opacity: 0.4; }
+    90%  { opacity: 0.2; }
+    100% { opacity: 0; transform: translateY(110vh) rotate(calc(var(--rot) + 30deg)) translateX(var(--drift)); }
+  }
+
+  /* SCANLINES */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.15) 2px,
+      rgba(0,0,0,0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* VIGNETTE */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: linear-gradient(to bottom, rgba(4,4,10,0.95), transparent);
+    border-bottom: 1px solid #2a0a4a44;
+  }
+
+  .nav-logo {
+    font-family: 'Creepster', cursive;
+    font-size: 1.6rem;
+    color: var(--gold);
+    text-shadow: 0 0 20px #c8a94a66;
+    letter-spacing: 4px;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-left: 2rem;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    z-index: 2;
+    background: radial-gradient(ellipse at 50% 60%, #2a0a4a22 0%, transparent 70%),
+                radial-gradient(ellipse at 30% 20%, #0d204022 0%, transparent 50%);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 8px;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(5rem, 18vw, 14rem);
+    line-height: 0.85;
+    color: var(--gold);
+    text-shadow:
+      0 0 40px #c8a94a55,
+      0 0 80px #c8a94a22,
+      2px 2px 0 #5a0a0a;
+    letter-spacing: 10px;
+    animation: flicker 8s infinite;
+    margin-bottom: 0.5rem;
+  }
+
+  @keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.7; }
+    97% { opacity: 1; }
+    98% { opacity: 0.4; }
+    99% { opacity: 1; }
+  }
+
+  .hero-subtitle {
+    font-family: 'Special Elite', serif;
+    font-size: 0.85rem;
+    letter-spacing: 6px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-tagline {
+    font-family: 'Special Elite', serif;
+    font-size: clamp(0.9rem, 2vw, 1.15rem);
+    color: #a090c0;
+    max-width: 520px;
+    line-height: 1.8;
+    margin: 2rem auto 3rem;
+    border-left: 2px solid var(--purple-mid);
+    padding-left: 1.5rem;
+    text-align: left;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    border: 1px solid;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+
+  .btn:hover::before { transform: translateX(0); }
+
+  .btn-primary {
+    color: var(--deep);
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .btn-primary::before { background: #fff2; }
+  .btn-primary:hover { box-shadow: 0 0 30px #c8a94a55; }
+
+  .btn-secondary {
+    color: var(--gold);
+    background: transparent;
+    border-color: var(--gold-dim);
+  }
+
+  .btn-secondary::before { background: #c8a94a11; }
+  .btn-secondary:hover { border-color: var(--gold); }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-hint span { font-size: 1.2rem; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--purple-mid), var(--gold-dim), var(--purple-mid), transparent);
+    margin: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--purple-bright);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 30px #c8a94a33;
+  }
+
+  /* STORY */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .story-text p {
+    font-family: 'Special Elite', serif;
+    font-size: 1rem;
+    line-height: 2;
+    color: #a090c0;
+    margin-bottom: 1.5rem;
+  }
+
+  .story-window {
+    background: var(--panel);
+    border: 1px solid var(--purple-mid);
+    padding: 2rem;
+    position: relative;
+  }
+
+  .story-window::before {
+    content: 'OBJETIVO';
+    position: absolute;
+    top: -0.6rem;
+    left: 1.5rem;
+    background: var(--panel);
+    padding: 0 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: var(--purple-bright);
+  }
+
+  .objective-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #2a0a4a44;
+    font-size: 0.85rem;
+  }
+
+  .objective-item:last-child { border-bottom: none; }
+
+  .obj-num {
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    min-width: 2rem;
+    margin-top: 2px;
+  }
+
+  .obj-text { color: #a090c0; line-height: 1.6; }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: var(--panel);
+    border: 1px solid #2a0a4a66;
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--purple-bright);
+    transform: translateY(-4px);
+  }
+
+  .feature-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-title {
+    font-family: 'Special Elite', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  .feature-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .feature-card:hover::after { width: 100%; }
+
+  /* GALLERY */
+  .gallery-placeholder {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .gallery-slot {
+    aspect-ratio: 16/9;
+    background: var(--panel);
+    border: 1px solid #2a0a4a66;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-slot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #2a0a4a11 0%, #0d204011 100%);
+  }
+
+  .gallery-slot-icon { font-size: 2rem; opacity: 0.3; }
+
+  /* DOWNLOAD */
+  .download-section {
+    background: linear-gradient(135deg, var(--panel) 0%, var(--blue-dark) 100%);
+    border: 1px solid var(--purple-mid);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .download-title {
+    font-family: 'Creepster', cursive;
+    font-size: 2.5rem;
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px #c8a94a44;
+  }
+
+  .download-desc {
+    font-family: 'Special Elite', serif;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .req-list {
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 2.2;
+    letter-spacing: 1px;
+  }
+
+  .req-list li::before {
+    content: '▸ ';
+    color: var(--purple-bright);
+  }
+
+  /* TECH */
+  .tech-pills {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+
+  .tech-pill {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--purple-mid);
+    color: var(--purple-bright);
+    background: #2a0a4a22;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid #2a0a4a44;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+  }
+
+  footer a { color: var(--purple-bright); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+
+  /* NOISE overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 998;
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .story-grid { grid-template-columns: 1fr; }
+    .gallery-placeholder { grid-template-columns: 1fr; }
+    .download-section { grid-template-columns: 1fr; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bills-layer" id="bills"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+<nav>
+  <div class="nav-logo">MONEY</div>
+  <div class="nav-links">
+    <a href="#historia">Historia</a>
+    <a href="#mecanicas">Mecánicas</a>
+    <a href="#capturas">Capturas</a>
+    <a href="#descarga">Descarga</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Institut Puig Castellar · Proyecto Final SMX 2025–26</p>
+  <h1 class="hero-title">MONEY</h1>
+  <p class="hero-subtitle">Survival Horror · Godot Engine</p>
+  <p class="hero-tagline">
+    Solo querías recuperar lo que era tuyo.<br>
+    Volviste a casa a buscar el dinero.<br>
+    No debiste hacerlo.
+  </p>
+  <div class="hero-buttons">
+    <a href="#descarga" class="btn btn-primary">▶ Descargar</a>
+    <a href="https://github.com/awpzz/money" target="_blank" class="btn btn-secondary">⌥ Repositorio</a>
+  </div>
+  <div class="scroll-hint">
+    <span>↓</span>
+    CONTINUAR
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- HISTORIA -->
+<section id="historia">
+  <p class="section-tag">// Argumento</p>
+  <h2 class="section-title">¿Por qué volviste?</h2>
+  <div class="story-grid">
+    <div class="story-text">
+      <p>
+        Te mudaste hace tiempo. Pero dejaste atrás algo importante: el dinero de la herencia, guardado en la caja fuerte de tu antigua casa.
+      </p>
+      <p>
+        Entras de noche. Las luces están apagadas. Solo tienes tu linterna. Encuentras el código, abres la caja, coges el dinero... y entonces te das cuenta de que no estás solo.
+      </p>
+      <p>
+        Hay algo en esa casa. Y sabe que estás aquí.
+      </p>
+    </div>
+    <div class="story-window">
+      <div class="objective-item">
+        <span class="obj-num">01</span>
+        <span class="obj-text">Encuentra el código de la caja fuerte</span>
+      </div>
+      <div class="objective-item">
+        <span class="obj-num">02</span>
+        <span class="obj-text">Abre la caja fuerte y recoge el dinero</span>
+      </div>
+      <div class="objective-item">
+        <span class="obj-num">03</span>
+        <span class="obj-text">Localiza la llave de salida</span>
+      </div>
+      <div class="objective-item">
+        <span class="obj-num">04</span>
+        <span class="obj-text">Escapa sin que el monstruo te atrape</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MECÁNICAS -->
+<section id="mecanicas">
+  <p class="section-tag">// Gameplay</p>
+  <h2 class="section-title">Mecánicas</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔦</div>
+      <h3 class="feature-title">Exploración en oscuridad</h3>
+      <p class="feature-desc">Empiezas con la casa a oscuras. Puedes ir encendiendo las luces o moverte solo con la linterna. Cada elección tiene consecuencias.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👁️</div>
+      <h3 class="feature-title">Sigilo y evasión</h3>
+      <p class="feature-desc">Agáchate para moverte sin ruido y esconderte del monstruo. Acceder al sótano requiere agacharse. El sonido importa.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <h3 class="feature-title">Puzzles de objeto</h3>
+      <p class="feature-desc">Busca el código, abre la caja fuerte, recoge el dinero y encuentra la llave de salida. Todo conectado en un único nivel tenso.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔊</div>
+      <h3 class="feature-title">Audio interactivo</h3>
+      <p class="feature-desc">Sistema de sonido reactivo: pasos, puertas, cajones, luz eléctrica, música de persecución. Cada acción tiene su sonido.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏠</div>
+      <h3 class="feature-title">Modelos originales</h3>
+      <p class="feature-desc">Todos los modelos 3D creados por los autores del proyecto en Blender y Godot: muebles, decoración, el monstruo...</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚙️</div>
+      <h3 class="feature-title">Menú completo</h3>
+      <p class="feature-desc">Menú principal, menú de pausa con ajustes de configuración, pantalla de muerte y secuencia de introducción.</p>
+    </div>
+  </div>
+
+  <div class="tech-pills">
+    <span class="tech-pill">Godot Engine</span>
+    <span class="tech-pill">GDScript</span>
+    <span class="tech-pill">Blender</span>
+    <span class="tech-pill">Linux x86_64</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAPTURAS -->
+<section id="capturas">
+  <p class="section-tag">// Galería</p>
+  <h2 class="section-title">El juego</h2>
+  <div class="gallery-placeholder">
+    <div class="gallery-slot">
+      <div class="gallery-slot-icon">📷</div>
+      <span><img src="img/escena2money.PNG"></span>
+    </div>
+    <div class="gallery-slot">
+      <div class="gallery-slot-icon">📷</div>
+      <span><img src="img/escena7money.PNG"></span>
+    </div>
+    <div class="gallery-slot">
+      <div class="gallery-slot-icon">📷</div>
+      <span><img src="img/escena4money.PNG"></span>
+    </div>
+  </div>
+  <p style="text-align:center; color: var(--muted); font-size:0.7rem; letter-spacing:2px; margin-top:1rem;">
+    → Sustituye los slots con imágenes reales: &lt;img src="img/captura1.jpg"&gt;
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- DESCARGA -->
+<section id="descarga" style="max-width:1100px;">
+  <p class="section-tag">// Descarga</p>
+  <div class="download-section">
+    <div>
+      <h2 class="download-title">Juega ahora</h2>
+      <p class="download-desc">
+        Descarga la versión completa de Money para Linux.<br>
+        Extrae el ZIP y ejecuta el archivo <code style="color:var(--gold)">Money.x86_64</code>.
+      </p>
+      <a href="https://github.com/awpzz/money/releases" target="_blank" class="btn btn-primary">⬇ Descargar</a>
+    </div>
+    <div>
+      <ul class="req-list">
+        <li>Linux Ubuntu / Debian</li>
+        <li>Arquitectura x86_64</li>
+        <li>OpenGL 3.3 compatible</li>
+        <li>Resolución mínima 1366×768</li>
+        <li>Auriculares recomendados</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:0.5rem;">
+    MONEY · Survival Horror · Institut Puig Castellar · SMX 2025–26
+  </p>
+  <p>
+    Yasser Belouafi Bakhat · Marcos Ruiz Borrega &nbsp;·&nbsp;
+    <a href="https://github.com/awpzz/money" target="_blank">GitHub</a>
+  </p>
+</footer>
+
+<script>
+  const layer = document.getElementById('bills');
+  const count = 18;
+  for (let i = 0; i < count; i++) {
+    const bill = document.createElement('div');
+    bill.className = 'bill';
+    const left = Math.random() * 100;
+    const delay = Math.random() * 20;
+    const dur = 12 + Math.random() * 20;
+    const rot = (Math.random() - 0.5) * 60;
+    const drift = (Math.random() - 0.5) * 200 + 'px';
+    bill.style.cssText = `left:${left}%;--rot:${rot}deg;--drift:${drift};animation-duration:${dur}s;animation-delay:-${delay}s;`;
+    layer.appendChild(bill);
+  }
+</script>
+</body>
+</html>
