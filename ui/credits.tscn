@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dxj0m5b0ried4"]
+
+[ext_resource type="FontFile" uid="uid://dda0ljr7sfnpr" path="res://fuentes_de_texto/WinkyRough-Medium.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="2"]
+
+[node name="credits" type="CanvasLayer" unique_id=303823755]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1334208621]
+offset_left = 19.0
+offset_top = 9.0
+offset_right = 407.0
+offset_bottom = 251.0
+theme_override_fonts/normal_font = ExtResource("1")
+theme_override_font_sizes/normal_font_size = 50
+text = "Creditos"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=521849424]
+offset_left = 19.0
+offset_top = 75.0
+offset_right = 407.0
+offset_bottom = 629.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 30
+text = "
+Juego creado por:
+
+Yasser Belouafi
+Marcos Salinas
+
+Sonidos de:
+Freesound.org (CC0)
+"
+
+[node name="x_button" type="Button" parent="." unique_id=1303896822]
+offset_left = 1098.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 25
+text = "X"

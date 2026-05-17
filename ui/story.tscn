@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dulw8m5ikglie"]
+
+[ext_resource type="Script" path="scene_path = res://ui/main_menu.tscn" id="1_xlpw4"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="2"]
+
+[sub_resource type="Animation" id="Animation_3uumw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/RichTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xm7hf"]
+resource_name = "fade"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/RichTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 10, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1vwf"]
+_data = {
+&"RESET": SubResource("Animation_3uumw"),
+&"fade": SubResource("Animation_xm7hf")
+}
+
+[node name="story" type="Control" unique_id=1886981946]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xlpw4")
+wait_time = 12.5
+scene_path = "res://scenery/game_intro.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1267189184]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1528321778]
+offset_right = 1159.0
+offset_bottom = 653.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=122000161]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_s1vwf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=309796097]
+modulate = Color(1, 1, 1, 0)
+offset_left = 21.0
+offset_top = 184.0
+offset_right = 1131.0
+offset_bottom = 613.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Te mudaste hace un tiempo y te has dado cuenta recientemente de que dejaste una gran cantidad de dinero en la caja fuerte de tu antigua casa. El dinero pertenecía a tu abuelo antes de fallecer.
+
+Ahora vuelves a la casa para recuperar lo que es tuyo…"

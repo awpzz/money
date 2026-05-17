@@ -1,0 +1,352 @@
+[gd_scene format=3 uid="uid://dka72c8g3hsno"]
+
+[ext_resource type="Script" uid="uid://byxe1uyoi0u08" path="res://scripts/settings.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://dda0ljr7sfnpr" path="res://fuentes_de_texto/WinkyRough-Medium.ttf" id="2"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="3"]
+
+[node name="settings" type="CanvasLayer" unique_id=2012797029]
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=231047381]
+offset_right = 1156.0
+offset_bottom = 652.0
+color = Color(0.351479, 0.061988, 0.0808574, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1477378413]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 1153.0
+offset_bottom = 183.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
+text = "[center]Ajustes:"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=398732669]
+offset_left = 20.0
+offset_top = 68.0
+offset_right = 442.0
+offset_bottom = 183.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 45
+text = "Visuales:"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="." unique_id=1452947292]
+offset_left = 1018.0
+offset_top = 68.0
+offset_right = 1186.0
+offset_bottom = 183.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 45
+text = "Audio:"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="." unique_id=994602960]
+offset_left = 910.0
+offset_top = 395.0
+offset_right = 1161.0
+offset_bottom = 568.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 45
+text = "Jugabilidad:"
+
+[node name="scale_text" type="RichTextLabel" parent="." unique_id=718926845]
+offset_left = 20.0
+offset_top = 145.0
+offset_right = 442.0
+offset_bottom = 217.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Escalado 3D:"
+
+[node name="shadow_text" type="RichTextLabel" parent="." unique_id=1263707305]
+offset_left = 267.0
+offset_top = 145.0
+offset_right = 569.0
+offset_bottom = 217.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Calidad de sombras:"
+
+[node name="window_text" type="RichTextLabel" parent="." unique_id=1985434420]
+offset_left = 20.0
+offset_top = 217.0
+offset_right = 442.0
+offset_bottom = 310.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Modo Ventana:"
+
+[node name="aa_text" type="RichTextLabel" parent="." unique_id=369860433]
+offset_left = 20.0
+offset_top = 360.0
+offset_right = 442.0
+offset_bottom = 460.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Anti-Aliasing:"
+
+[node name="fps_text" type="RichTextLabel" parent="." unique_id=1978320841]
+offset_left = 20.0
+offset_top = 452.0
+offset_right = 442.0
+offset_bottom = 546.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Limitar FPS:"
+
+[node name="vsync_text" type="RichTextLabel" parent="." unique_id=1451445259]
+offset_left = 75.0
+offset_top = 306.0
+offset_right = 442.0
+offset_bottom = 413.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "V-Sync"
+
+[node name="ssil_text" type="RichTextLabel" parent="." unique_id=1566698412]
+offset_left = 75.0
+offset_top = 552.0
+offset_right = 442.0
+offset_bottom = 646.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "SSIL"
+
+[node name="glow_text" type="RichTextLabel" parent="." unique_id=1329368991]
+offset_left = 217.0
+offset_top = 552.0
+offset_right = 442.0
+offset_bottom = 646.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Brillo"
+
+[node name="volumetric_text" type="RichTextLabel" parent="." unique_id=1819325001]
+offset_left = 368.0
+offset_top = 552.0
+offset_right = 595.0
+offset_bottom = 646.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Niebla volumétrica"
+
+[node name="volume_text" type="RichTextLabel" parent="." unique_id=523889430]
+offset_left = 943.0
+offset_top = 133.0
+offset_right = 1327.0
+offset_bottom = 205.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Volumen general:"
+
+[node name="sfx_text" type="RichTextLabel" parent="." unique_id=203503500]
+offset_left = 925.0
+offset_top = 205.0
+offset_right = 1274.0
+offset_bottom = 329.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Volumen de efectos:"
+
+[node name="music_text" type="RichTextLabel" parent="." unique_id=981420661]
+offset_left = 925.0
+offset_top = 269.0
+offset_right = 1297.0
+offset_bottom = 373.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Volumen de música:"
+
+[node name="music_text2" type="RichTextLabel" parent="." unique_id=2562004]
+offset_left = 1009.0
+offset_top = 467.0
+offset_right = 1353.0
+offset_bottom = 632.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 25
+text = "Sensibilidad:"
+
+[node name="scaling_slider" type="HSlider" parent="." unique_id=1527505524]
+offset_left = 18.0
+offset_top = 168.0
+offset_right = 225.0
+offset_bottom = 219.0
+min_value = 0.25
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="volume_slider" type="HSlider" parent="." unique_id=1533764916]
+offset_left = 929.0
+offset_top = 154.0
+offset_right = 1136.0
+offset_bottom = 205.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="sfx_slider" type="HSlider" parent="." unique_id=143251990]
+offset_left = 929.0
+offset_top = 203.0
+offset_right = 1136.0
+offset_bottom = 293.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="music_slider" type="HSlider" parent="." unique_id=1980793500]
+offset_left = 929.0
+offset_top = 266.0
+offset_right = 1136.0
+offset_bottom = 358.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="look_slider" type="HSlider" parent="." unique_id=736908821]
+offset_left = 929.0
+offset_top = 390.0
+offset_right = 1136.0
+offset_bottom = 640.0
+min_value = 0.1
+max_value = 0.5
+step = 0.05
+value = 0.2
+
+[node name="window_mode" type="OptionButton" parent="." unique_id=531772110]
+offset_left = 23.0
+offset_top = 254.0
+offset_right = 247.0
+offset_bottom = 290.0
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 20
+selected = 1
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Exclusive Fullscreen"
+popup/item_2/id = 2
+
+[node name="shadow_button" type="OptionButton" parent="." unique_id=694613495]
+offset_left = 273.0
+offset_top = 189.0
+offset_right = 497.0
+offset_bottom = 225.0
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 20
+selected = 2
+item_count = 6
+popup/item_0/text = "Hard"
+popup/item_0/id = 0
+popup/item_1/text = "Soft Very Low"
+popup/item_1/id = 1
+popup/item_2/text = "Soft Low"
+popup/item_2/id = 2
+popup/item_3/text = "Soft Medium"
+popup/item_3/id = 3
+popup/item_4/text = "Soft High"
+popup/item_4/id = 4
+popup/item_5/text = "Soft Ultra"
+popup/item_5/id = 5
+
+[node name="aa_button" type="OptionButton" parent="." unique_id=482576062]
+offset_left = 23.0
+offset_top = 402.0
+offset_right = 247.0
+offset_bottom = 438.0
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 20
+selected = 1
+item_count = 6
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "TAA"
+popup/item_2/id = 2
+popup/item_3/text = "MSAA 2X"
+popup/item_3/id = 3
+popup/item_4/text = "MSAA 4X"
+popup/item_4/id = 4
+popup/item_5/text = "MSAA 8X"
+popup/item_5/id = 5
+
+[node name="fps_button" type="OptionButton" parent="." unique_id=1376739824]
+offset_left = 23.0
+offset_top = 493.0
+offset_right = 247.0
+offset_bottom = 529.0
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 20
+selected = 2
+item_count = 3
+popup/item_0/text = "30FPS"
+popup/item_0/id = 0
+popup/item_1/text = "60FPS"
+popup/item_1/id = 1
+popup/item_2/text = "Sin límite"
+popup/item_2/id = 2
+
+[node name="vsync_button" type="Button" parent="." unique_id=1822289564]
+offset_left = 19.0
+offset_top = 302.0
+offset_right = 65.0
+offset_bottom = 345.0
+theme_override_font_sizes/font_size = 25
+toggle_mode = true
+button_pressed = true
+text = "O"
+
+[node name="ssil_button" type="Button" parent="." unique_id=1769426129]
+offset_left = 19.0
+offset_top = 548.0
+offset_right = 65.0
+offset_bottom = 591.0
+theme_override_font_sizes/font_size = 25
+toggle_mode = true
+button_pressed = true
+text = "O"
+
+[node name="glow_button" type="Button" parent="." unique_id=982286942]
+offset_left = 161.0
+offset_top = 548.0
+offset_right = 208.0
+offset_bottom = 591.0
+theme_override_font_sizes/font_size = 25
+toggle_mode = true
+button_pressed = true
+text = "O"
+
+[node name="volumetric_button" type="Button" parent="." unique_id=1602081580]
+offset_left = 308.0
+offset_top = 548.0
+offset_right = 354.0
+offset_bottom = 591.0
+theme_override_font_sizes/font_size = 25
+toggle_mode = true
+button_pressed = true
+text = "O"
+
+[node name="x_button" type="Button" parent="." unique_id=117330298]
+offset_left = 1098.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 25
+text = "X"
+
+[connection signal="value_changed" from="scaling_slider" to="." method="scale_3d"]
+[connection signal="value_changed" from="volume_slider" to="." method="set_master_volume"]
+[connection signal="value_changed" from="sfx_slider" to="." method="set_sfx_volume"]
+[connection signal="value_changed" from="music_slider" to="." method="set_music_volume"]
+[connection signal="value_changed" from="look_slider" to="." method="set_look_speed"]
+[connection signal="item_selected" from="window_mode" to="." method="set_window_mode"]
+[connection signal="item_selected" from="shadow_button" to="." method="set_shadows"]
+[connection signal="item_selected" from="aa_button" to="." method="set_aa"]
+[connection signal="item_selected" from="fps_button" to="." method="set_fps_cap"]
+[connection signal="toggled" from="vsync_button" to="." method="set_vsync"]
+[connection signal="toggled" from="ssil_button" to="." method="set_ssil"]
+[connection signal="toggled" from="glow_button" to="." method="set_glow"]
+[connection signal="toggled" from="volumetric_button" to="." method="set_volumetrics"]

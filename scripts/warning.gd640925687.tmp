@@ -1,0 +1,15 @@
+extends Control
+
+@export var wait_time: float
+@export var scene_path: String
+
+
+func _ready() -> void :
+    if has_node("CanvasLayer/AnimationPlayer"):
+        $CanvasLayer / AnimationPlayer.play("fade")
+    await get_tree().create_timer(wait_time, false).timeout
+    get_tree().change_scene_to_file(scene_path)
+
+func _process(_delta: float) -> void :
+    if Input.is_action_just_pressed("pause"):
+        get_tree().change_scene_to_file(scene_path)

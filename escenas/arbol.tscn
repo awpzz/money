@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cq55hg3gv6lyk"]
+
+[ext_resource type="PackedScene" uid="uid://dwtc2hnclu05v" path="res://glb_models/arbol.glb" id="1"]
+[ext_resource type="Texture2D" uid="uid://bo4pcbkpd5es7" path="res://texturas/wood_tree.jpg" id="2"]
+[ext_resource type="Texture2D" uid="uid://bof5ffo6wek8b" path="res://texturas/wood_normalmap2.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bjyqva52l8v02" path="res://texturas/cesped.jpg" id="4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0f60"]
+albedo_color = Color(0.685349, 0.589449, 0.512658, 1)
+albedo_texture = ExtResource("2")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3")
+uv1_scale = Vector3(1.245, 0.555, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tvfbb"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wpgkb"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_tvfbb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5d5v6"]
+albedo_color = Color(0.695503, 0.695503, 0.695503, 1)
+albedo_texture = ExtResource("4")
+roughness = 0.5
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_wpgkb")
+uv1_scale = Vector3(2, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2kkgn"]
+size = Vector3(2.495, 6.32, 2.135)
+
+[node name="tree" instance=ExtResource("1")]
+
+[node name="Cube" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_r0f60")
+
+[node name="Sphere" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_5d5v6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_2kkgn")

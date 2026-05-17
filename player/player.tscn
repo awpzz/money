@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dyd660adt3rru"]
+
+[ext_resource type="Script" uid="uid://ddglwprmcgrhj" path="res://player/player.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://deps7m75ump62" path="res://sonidos/carpet_footstep.mp3" id="2"]
+[ext_resource type="AudioStream" uid="uid://dnvtcgyhsswt2" path="res://sonidos/carpet_footstep2.mp3" id="3"]
+[ext_resource type="AudioStream" uid="uid://bj5fjkb5fs130" path="res://sonidos/carpet_footstep3.mp3" id="4"]
+[ext_resource type="AudioStream" uid="uid://bikdcir7wwyvx" path="res://sonidos/carpet_footstep4.mp3" id="5"]
+[ext_resource type="AudioStream" uid="uid://dv3da2f7u0hsq" path="res://sonidos/footstep_1.mp3" id="6"]
+[ext_resource type="AudioStream" uid="uid://dt58onu5v0ncj" path="res://sonidos/footstep_2.mp3" id="7"]
+[ext_resource type="AudioStream" uid="uid://sklp75jlu01t" path="res://sonidos/foostep_3.mp3" id="8"]
+[ext_resource type="AudioStream" uid="uid://d38fy31esijgc" path="res://sonidos/footstep_4.mp3" id="9"]
+[ext_resource type="Script" uid="uid://b6e358pinnoyp" path="res://player/fp_cam.gd" id="10"]
+[ext_resource type="Script" uid="uid://cpgxsehn8gk5n" path="res://player/fov.gd" id="11"]
+[ext_resource type="Script" uid="uid://b2bkb4vt1c7ow" path="res://player/player_interact.gd" id="12"]
+[ext_resource type="PackedScene" uid="uid://swggej1f2gxh" path="res://ui/player_ui.tscn" id="13"]
+[ext_resource type="Script" uid="uid://bu7adw020h4w0" path="res://player/floorcast.gd" id="14"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m5uqx"]
+radius = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yj8b3"]
+
+[sub_resource type="Animation" id="Animation_l1hhl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sy5a1"]
+resource_name = "walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.05, 0, 0), Vector3(0, -0.05, 0), Vector3(0.05, 0, 0), Vector3(0, -0.05, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cgmks"]
+_data = {
+&"RESET": SubResource("Animation_l1hhl"),
+&"walk": SubResource("Animation_sy5a1")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_a46vx"]
+
+[node name="player" type="CharacterBody3D" unique_id=1760010211]
+collision_layer = 3
+collision_mask = 3
+floor_max_angle = 1.13446
+script = ExtResource("1")
+footstep_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")])
+grass_sounds = Array[AudioStream]([ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=721712427]
+shape = SubResource("CapsuleShape3D_m5uqx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1797026954]
+visible = false
+mesh = SubResource("CapsuleMesh_yj8b3")
+
+[node name="head" type="Node3D" parent="." unique_id=2131009420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70184, 0)
+script = ExtResource("10")
+
+[node name="Camera3D" type="Camera3D" parent="head" unique_id=1667302827]
+script = ExtResource("11")
+
+[node name="RayCast3D" type="RayCast3D" parent="head" unique_id=238792016]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 3
+script = ExtResource("12")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="head" unique_id=388005831]
+libraries/ = SubResource("AnimationLibrary_cgmks")
+speed_scale = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="head" unique_id=2068159865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.96)
+visible = false
+mesh = SubResource("BoxMesh_a46vx")
+
+[node name="player_ui" parent="." unique_id=514543610 instance=ExtResource("13")]
+
+[node name="feet" type="AudioStreamPlayer3D" parent="." unique_id=2113567181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.949477, 0)
+stream = ExtResource("2")
+max_distance = 30.0
+bus = &"SFX"
+
+[node name="floorcast" type="RayCast3D" parent="." unique_id=700107675]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.964395, 0)
+collision_mask = 3
+script = ExtResource("14")

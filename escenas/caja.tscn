@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cu25j1qaaxw62"]
+
+[ext_resource type="Material" uid="uid://b2tby6wsqe67m" path="res://materiales/cajon.tres" id="1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_64mi3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4gjrm"]
+
+[node name="crate" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1")
+mesh = SubResource("BoxMesh_64mi3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_4gjrm")

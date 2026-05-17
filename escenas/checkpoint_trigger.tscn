@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://t1q8in3pcwn"]
+
+[ext_resource type="Script" uid="uid://dt0k5oq8jxn15" path="res://scripts/checkpoint_trigger.gd" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0rt4q"]
+
+[node name="checkpoint_trigger" type="Area3D"]
+script = ExtResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0rt4q")
+
+[connection signal="body_entered" from="." to="." method="enter_trigger"]

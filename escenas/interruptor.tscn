@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dcf5cvx5478c3"]
+
+[ext_resource type="Script" uid="uid://b0db3b3jssdft" path="res://scripts/light_switch.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://rl60bthpvvqf" path="res://sonidos/light_switch.mp3" id="2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj4ew"]
+emission_enabled = true
+emission = Color(0.91374, 0.901157, 0.791509, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7b20"]
+albedo_color = Color(0.887927, 0.848274, 0.820357, 1)
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_kpemo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kcnny"]
+size = Vector3(0.34, 0.495, 0.355933)
+
+[node name="light_switch" type="Node3D"]
+script = ExtResource("1")
+on_mat = SubResource("StandardMaterial3D_nj4ew")
+off_mat = SubResource("StandardMaterial3D_p7b20")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.35752, 0, 0, 0, 0.509503, 0, 0, 0, 0.188532, 0, 0, 0)
+mesh = SubResource("BoxMesh_kpemo")
+
+[node name="off" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.19203, 0.00023188, -0.000451134, 2.60203e-05, 0.161729, 0.146445, 0.000412821, -0.118055, 0.200622, 0, 0.0275793, 0.127117)
+mesh = SubResource("BoxMesh_kpemo")
+
+[node name="on" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.19203, 0.00023188, -0.000451134, -0.000390223, 0.157555, -0.153288, 0.000137202, 0.123571, 0.195444, 0, -0.0176987, 0.127117)
+visible = false
+mesh = SubResource("BoxMesh_kpemo")
+
+[node name="light_switch" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="light_switch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0827515)
+shape = SubResource("BoxShape3D_kcnny")
+
+[node name="sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2")
+max_distance = 15.0
+bus = &"SFX"

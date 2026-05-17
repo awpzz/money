@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ydfruk20bxy3"]
+
+[ext_resource type="Texture2D" uid="uid://cn6nd6lqem8tk" path="res://texturas/metal_tin.jpg" id="1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_urlqo"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p2x84"]
+width = 252
+noise = SubResource("FastNoiseLite_urlqo")
+seamless = true
+as_normal_map = true
+
+[resource]
+albedo_texture = ExtResource("1")
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = SubResource("NoiseTexture2D_p2x84")
+uv1_scale = Vector3(10.405, 1, 1)

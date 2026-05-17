@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://lgc71bfsx7gb"]
+
+[ext_resource type="Texture2D" uid="uid://dnwcqi1aynd4t" path="res://texturas/piedra.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://b806gyuptsa73" path="res://texturas/stone_normalmap.png" id="2"]
+
+[resource]
+albedo_texture = ExtResource("1")
+normal_enabled = true
+normal_texture = ExtResource("2")
+uv1_scale = Vector3(2.665, 3, 1)

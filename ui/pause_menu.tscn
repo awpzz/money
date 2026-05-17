@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dv06x7bvv2v5c"]
+
+[ext_resource type="FontFile" uid="uid://dda0ljr7sfnpr" path="res://fuentes_de_texto/WinkyRough-Medium.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="2"]
+
+[sub_resource type="GDScript" id="GDScript_ejwgg"]
+
+[node name="pause_menu" type="CanvasLayer" unique_id=2027330931]
+layer = 2
+script = SubResource("GDScript_ejwgg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1905350978]
+offset_right = 411.0
+offset_bottom = 648.0
+color = Color(0.384082, 0, 0.0142143, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1559104154]
+offset_right = 399.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1481666145]
+offset_left = 4.0
+offset_top = 38.0
+offset_right = 395.0
+offset_bottom = 148.0
+theme_override_fonts/normal_font = ExtResource("1")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]PAUSADO"
+
+[node name="resume" type="Button" parent="." unique_id=1784411237]
+offset_left = 76.0
+offset_top = 159.0
+offset_right = 323.0
+offset_bottom = 236.0
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 50
+text = "Continuar"
+
+[node name="settings" type="Button" parent="." unique_id=138221198]
+offset_left = 76.0
+offset_top = 257.0
+offset_right = 323.0
+offset_bottom = 334.0
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 50
+text = "Ajustes"
+
+[node name="controls" type="Button" parent="." unique_id=1068645042]
+offset_left = 76.0
+offset_top = 357.0
+offset_right = 323.0
+offset_bottom = 434.0
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 50
+text = "Controles"
+
+[node name="quit_game" type="Button" parent="." unique_id=500204423]
+offset_left = 50.0
+offset_top = 454.0
+offset_right = 355.0
+offset_bottom = 531.0
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 50
+text = "Salir del juego"

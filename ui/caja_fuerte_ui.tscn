@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bbgtw6fifqur3"]
+
+[ext_resource type="FontFile" uid="uid://dda0ljr7sfnpr" path="res://fuentes_de_texto/WinkyRough-Medium.ttf" id="1_pe4fc"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="2_nirsa"]
+
+[node name="safe_ui" type="CanvasLayer" unique_id=50919280]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=901135682]
+offset_right = 1158.0
+offset_bottom = 653.0
+color = Color(0, 0, 0, 0.317647)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1593806911]
+offset_left = 232.0
+offset_top = 169.0
+offset_right = 929.0
+offset_bottom = 368.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1085321742]
+offset_left = 235.0
+offset_top = 181.0
+offset_right = 925.0
+offset_bottom = 369.0
+theme_override_fonts/normal_font = ExtResource("1_pe4fc")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]PIN de la caja fuerte:"
+
+[node name="password" type="LineEdit" parent="." unique_id=670057421]
+offset_left = 254.0
+offset_top = 257.0
+offset_right = 912.0
+offset_bottom = 354.0
+theme_override_fonts/font = ExtResource("2_nirsa")
+theme_override_font_sizes/font_size = 45
+placeholder_text = "XXXX"
+alignment = 1
+context_menu_enabled = false
+
+[node name="confirm" type="Button" parent="." unique_id=237950559]
+offset_left = 306.0
+offset_top = 390.0
+offset_right = 557.0
+offset_bottom = 467.0
+theme_override_fonts/font = ExtResource("2_nirsa")
+theme_override_font_sizes/font_size = 50
+text = "Confirmar"
+
+[node name="back" type="Button" parent="." unique_id=1180666583]
+offset_left = 616.0
+offset_top = 389.0
+offset_right = 867.0
+offset_bottom = 466.0
+theme_override_fonts/font = ExtResource("2_nirsa")
+theme_override_font_sizes/font_size = 50
+text = "Volver"

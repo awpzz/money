@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c6tj2kjako0wt"]
+
+[ext_resource type="Script" uid="uid://u0bw7t8pu0m2" path="res://scripts/warning.gd" id="1"]
+
+[node name="gamedev_intro" type="Control" unique_id=971214612]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+wait_time = 5.5
+scene_path = "res://scenery/warning.tscn"
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=482603598]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+autoplay = true

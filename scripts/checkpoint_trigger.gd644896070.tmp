@@ -1,0 +1,28 @@
+extends Area3D
+
+var triggered = false
+@onready var player = get_tree().current_scene.get_node("player")
+@onready var checkpoint_pos = get_tree().current_scene.get_node("checkpoint_position")
+@onready var trapdoor = get_tree().current_scene.get_node("house/trapdoor/trapdoor_hinge")
+@onready var ui = get_tree().current_scene.get_node("player/player_ui")
+
+func _ready() -> void :
+    var save = FileAccess.open("user://checkpoint.skibidi", FileAccess.READ)
+    if save:
+        player.global_transform.origin = checkpoint_pos.global_transform.origin
+        player.global_rotation = checkpoint_pos.global_rotation
+        get_tree().current_scene.get_node("key").queue_free()
+        ui.set_task("Find your money")
+        get_tree().current_scene.get_node("task_triggers/task_trigger").queue_free()
+        trapdoor.get_node("AnimationPlayer").play("open")
+        save.close()
+
+func enter_trigger(body):
+    if body.name == "player" and !triggered:
+        triggered = true
+        var save = FileAccess.open("user://checkpoint.skibidi", FileAccess.WRITE)
+        save.store_string("done")
+        save.close()
+        ui.get_node("CanvasLayer/save_text").visible = true
+        await get_tree().create_timer(2.0, true).timeout
+        ui.get_node("CanvasLayer/save_text").visible = false

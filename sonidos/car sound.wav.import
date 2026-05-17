@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8pc4yd6sy5u0"
+path="res://.godot/imported/car sound.wav-1c5df35305318b8c7279d82c04c99e66.sample"
+
+[deps]
+
+source_file="res://sonidos/car sound.wav"
+dest_files=["res://.godot/imported/car sound.wav-1c5df35305318b8c7279d82c04c99e66.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=48000
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=1188432
+compress/mode=0

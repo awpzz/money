@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dvbjsls17f574"]
+
+[ext_resource type="Material" uid="uid://dwvhsfu4x5phx" path="res://materiales/metal_3.tres" id="1"]
+[ext_resource type="Material" uid="uid://c114c5kvt2p7p" path="res://materiales/metal_2.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://0vjo0fe6dsd8" path="res://texturas/sistema_agua_caliente.png" id="3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dxohq"]
+radial_segments = 24
+
+[sub_resource type="BoxMesh" id="BoxMesh_ew4gv"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mrn5s"]
+radial_segments = 16
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_20fkw"]
+size = Vector3(1, 2.29169, 1)
+
+[node name="hot_water_system" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 0.089, 0, 0, 0, 1.2, 0, 0, 0)
+material_override = ExtResource("1")
+mesh = SubResource("CylinderMesh_dxohq")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 0.089, 0, 0, 0, 1.2, 0, 2.09695, 0)
+material_override = ExtResource("1")
+mesh = SubResource("CylinderMesh_dxohq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05886, 0)
+material_override = ExtResource("2")
+mesh = SubResource("CylinderMesh_dxohq")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.140889, 0, 0, 0, 0.25195, 0, 0, 0, 0.2578, 0.514362, 1.26776, 0)
+material_override = ExtResource("1")
+mesh = SubResource("BoxMesh_ew4gv")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, -2.47642e-08, -0.05, 0, 0.566539, -2.18557e-09, 0.528, 1.28885, 0.481392)
+material_override = ExtResource("2")
+mesh = SubResource("CylinderMesh_mrn5s")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00299072, 1.60069, -0.393338)
+size = Vector3(0.664, 0.408722, 0.669)
+texture_albedo = ExtResource("3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0477, 0)
+shape = SubResource("BoxShape3D_20fkw")

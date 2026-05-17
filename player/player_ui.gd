@@ -1,0 +1,117 @@
+extends Control
+
+@onready var rng = RandomNumberGenerator.new()
+
+@onready var safe_anim = get_tree().current_scene.get_node("house/safe/AnimationPlayer")
+@onready var code_paper = get_tree().current_scene.get_node("code_paper")
+
+var safe_password: String
+var safe_interactable := true
+
+
+func _ready() -> void:
+	$fade_ui/AnimationPlayer.play("fade")
+	$safe_ui.visible = false
+	$settings.visible = false
+	$pause_menu.visible = false
+
+	set_task("Toca el timbre")
+
+	# generar código seguro
+	var p1 = rng.randi_range(0, 9)
+	var p2 = rng.randi_range(0, 9)
+	var p3 = rng.randi_range(0, 9)
+	var p4 = rng.randi_range(0, 9)
+
+	safe_password = str(p1) + str(p2) + str(p3) + str(p4)
+
+	code_paper.get_node("code_text").mesh.text = safe_password
+	print(safe_password)
+
+	await get_tree().create_timer(1.1).timeout
+	$CanvasLayer/controls/AnimationPlayer.play("fade")
+	$fade_ui.visible = false
+
+
+func open_settings() -> void:
+	$interact.play()
+	$pause_menu.visible = false
+	$settings.visible = true
+
+
+func open_controls() -> void:
+	$interact.play()
+	$pause_menu.visible = false
+	$controls.visible = true
+
+
+func close_menus() -> void:
+	$interact.play()
+	$controls.visible = false
+	$settings.visible = false
+	$pause_menu.visible = true
+
+
+func play_hover() -> void:
+	$hover.pitch_scale = rng.randf_range(0.75, 1.25)
+	$hover.play()
+
+
+func resume_game() -> void:
+	$interact.play()
+	get_tree().paused = false
+	$pause_menu.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func go_to_main_menu() -> void:
+	$interact.play()
+	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	await get_tree().create_timer(0.3).timeout
+	get_tree().change_scene_to_file("res://levels/level.tscn")
+
+func quit_game() -> void:
+	$interact.play()
+	await get_tree().create_timer(0.5).timeout
+	get_tree().quit()
+
+
+
+func open_safe_password() -> void:
+	if safe_interactable:
+		$safe_ui.visible = true
+		get_tree().paused = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func confirm_password() -> void:
+	$interact.play()
+
+	if $safe_ui/password.text == safe_password:
+		safe_anim.play("open")
+		safe_anim.get_parent().get_node("hinge/open").play()
+		safe_interactable = false
+		exit_safe()
+
+
+func exit_safe() -> void:
+	$interact.play()
+	$safe_ui.visible = false
+	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func set_task(task_text: String) -> void:
+	$task_sound.play()
+	$task_ui/task_text.text = task_text
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and !$safe_ui.visible and !$settings.visible:
+		$pause_menu.visible = !$pause_menu.visible
+		get_tree().paused = $pause_menu.visible
+
+		Input.set_mouse_mode(
+			Input.MOUSE_MODE_VISIBLE if get_tree().paused else Input.MOUSE_MODE_CAPTURED
+		)

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b5keihykwdae0"]
+
+[ext_resource type="FontFile" uid="uid://dda0ljr7sfnpr" path="res://fuentes_de_texto/WinkyRough-Medium.ttf" id="1_fswds"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="2_hpm1s"]
+
+[node name="controles" type="CanvasLayer" unique_id=1191861275]
+
+[node name="bg" type="ColorRect" parent="." unique_id=1985346325]
+offset_right = 1160.0
+offset_bottom = 654.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=982952222]
+offset_left = 26.0
+offset_top = 24.0
+offset_right = 429.0
+offset_bottom = 207.0
+theme_override_fonts/normal_font = ExtResource("1_fswds")
+theme_override_font_sizes/normal_font_size = 50
+text = "Controles"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=1466226116]
+offset_left = 30.0
+offset_top = 101.0
+offset_right = 429.0
+offset_bottom = 629.0
+theme_override_fonts/normal_font = ExtResource("2_hpm1s")
+theme_override_font_sizes/normal_font_size = 30
+text = "[WASD] Movimiento
+[Mouse] Mirar alrededor
+[E] Interactuar
+[Ctrl] Agacharse
+[F] Linterna
+[RMB] Zoom
+[Esc] Pausar"
+
+[node name="x_button" type="Button" parent="." unique_id=1394076059]
+offset_left = 1098.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 25
+text = "X"

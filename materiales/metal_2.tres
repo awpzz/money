@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c114c5kvt2p7p"]
+
+[ext_resource type="Texture2D" uid="uid://dnwcqi1aynd4t" path="res://texturas/piedra.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://b806gyuptsa73" path="res://texturas/stone_normalmap.png" id="2"]
+
+[resource]
+albedo_texture = ExtResource("1")
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2")

@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://cxlc0x0f4ywn"]
+
+[ext_resource type="FontFile" uid="uid://qm1ryhes2ped" path="res://fuentes_de_texto/WinkyRough-LightItalic.ttf" id="3"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="4"]
+[ext_resource type="FontFile" uid="uid://dda0ljr7sfnpr" path="res://fuentes_de_texto/WinkyRough-Medium.ttf" id="5"]
+[ext_resource type="PackedScene" uid="uid://dka72c8g3hsno" path="res://ui/settings.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://b5keihykwdae0" path="res://escenas/controls.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://dxj0m5b0ried4" path="res://ui/credits.tscn" id="8"]
+[ext_resource type="AudioStream" uid="uid://cwl2718yt7ej6" path="res://sonidos/button.mp3" id="9"]
+[ext_resource type="AudioStream" uid="uid://f2hyv5xiixgs" path="res://sonidos/menu_sound_1.mp3" id="10"]
+[ext_resource type="AudioStream" uid="uid://8j0n8q7opvwp" path="res://musica/main_theme.mp3" id="11"]
+
+[node name="main_menu" type="Control" unique_id=1204794492]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2065672567]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -1.0
+offset_right = 1157.0
+offset_bottom = 652.0
+color = Color(0, 0, 0, 1)
+
+[node name="main" type="CanvasLayer" parent="." unique_id=1914695934]
+
+[node name="TextureRect" type="TextureRect" parent="main" unique_id=157695155]
+offset_left = 395.0
+offset_top = -10.0
+offset_right = 743.0
+offset_bottom = 251.0
+expand_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="main" unique_id=301135677]
+offset_left = 1072.0
+offset_top = 9.0
+offset_right = 1163.0
+offset_bottom = 62.0
+theme_override_fonts/normal_font = ExtResource("3")
+text = "Version 1.0"
+
+[node name="Button" type="Button" parent="main" unique_id=149102400]
+offset_left = 437.0
+offset_top = 219.0
+offset_right = 713.0
+offset_bottom = 269.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+text = "New Game"
+
+[node name="Button2" type="Button" parent="main" unique_id=1220683824]
+offset_left = 437.0
+offset_top = 281.0
+offset_right = 713.0
+offset_bottom = 331.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "Continue"
+
+[node name="Button3" type="Button" parent="main" unique_id=1550048868]
+offset_left = 437.0
+offset_top = 343.0
+offset_right = 713.0
+offset_bottom = 393.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+
+[node name="Button4" type="Button" parent="main" unique_id=1823571098]
+offset_left = 437.0
+offset_top = 405.0
+offset_right = 713.0
+offset_bottom = 455.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+text = "Controls"
+
+[node name="Button5" type="Button" parent="main" unique_id=1469373169]
+offset_left = 437.0
+offset_top = 466.0
+offset_right = 713.0
+offset_bottom = 516.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+text = "Credits"
+
+[node name="Button6" type="Button" parent="main" unique_id=267919708]
+offset_left = 437.0
+offset_top = 526.0
+offset_right = 713.0
+offset_bottom = 576.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+text = "Quit Game"
+
+[node name="are_you_sure" type="CanvasLayer" parent="." unique_id=1144956175]
+visible = false
+
+[node name="Button" type="Button" parent="are_you_sure" unique_id=1544404467]
+offset_left = 442.0
+offset_top = 261.0
+offset_right = 718.0
+offset_bottom = 317.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+text = "Yes"
+
+[node name="Button2" type="Button" parent="are_you_sure" unique_id=1653871650]
+offset_left = 442.0
+offset_top = 337.0
+offset_right = 718.0
+offset_bottom = 387.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 30
+text = "No"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="are_you_sure" unique_id=1281422773]
+offset_left = 1.0
+offset_top = 164.0
+offset_right = 1163.0
+offset_bottom = 226.0
+theme_override_fonts/normal_font = ExtResource("5")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Are you sure you want to start a new game?"
+
+[node name="settings" parent="." unique_id=458999920 instance=ExtResource("6")]
+visible = false
+
+[node name="controls" parent="." unique_id=521208568 instance=ExtResource("7")]
+visible = false
+
+[node name="credits" parent="." unique_id=1011930275 instance=ExtResource("8")]
+visible = false
+
+[node name="interact" type="AudioStreamPlayer" parent="." unique_id=4742628]
+stream = ExtResource("9")
+bus = &"SFX"
+
+[node name="hover" type="AudioStreamPlayer" parent="." unique_id=324311069]
+stream = ExtResource("10")
+bus = &"SFX"
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=1912268921]
+stream = ExtResource("11")
+autoplay = true
+bus = &"Music"
+
+[connection signal="mouse_entered" from="main/Button" to="." method="play_hover"]
+[connection signal="pressed" from="main/Button" to="." method="new_game"]
+[connection signal="mouse_entered" from="main/Button2" to="." method="play_hover"]
+[connection signal="pressed" from="main/Button2" to="." method="continue_game"]
+[connection signal="mouse_entered" from="main/Button3" to="." method="play_hover"]
+[connection signal="pressed" from="main/Button3" to="." method="open_settings"]
+[connection signal="mouse_entered" from="main/Button4" to="." method="play_hover"]
+[connection signal="pressed" from="main/Button4" to="." method="open_controls"]
+[connection signal="mouse_entered" from="main/Button5" to="." method="play_hover"]
+[connection signal="pressed" from="main/Button5" to="." method="open_credits"]
+[connection signal="mouse_entered" from="main/Button6" to="." method="play_hover"]
+[connection signal="pressed" from="main/Button6" to="." method="quit_game"]
+[connection signal="mouse_entered" from="are_you_sure/Button" to="." method="play_hover"]
+[connection signal="pressed" from="are_you_sure/Button" to="." method="confirm_yes"]
+[connection signal="mouse_entered" from="are_you_sure/Button2" to="." method="play_hover"]
+[connection signal="pressed" from="are_you_sure/Button2" to="." method="confirm_no"]
+[connection signal="mouse_entered" from="settings/scaling_slider" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/volume_slider" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/sfx_slider" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/music_slider" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/look_slider" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/window_mode" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/shadow_button" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/aa_button" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/fps_button" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/vsync_button" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/ssil_button" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/glow_button" to="." method="play_hover"]
+[connection signal="mouse_entered" from="settings/volumetric_button" to="." method="play_hover"]
+[connection signal="pressed" from="settings/x_button" to="." method="confirm_no"]
+[connection signal="mouse_entered" from="controls/x_button" to="." method="play_hover"]
+[connection signal="pressed" from="controls/x_button" to="." method="confirm_no"]
+[connection signal="mouse_entered" from="credits/x_button" to="." method="play_hover"]
+[connection signal="pressed" from="credits/x_button" to="." method="confirm_no"]
+
+[editable path="settings"]
+[editable path="controls"]
+[editable path="credits"]

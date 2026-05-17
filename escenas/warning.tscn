@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://cir14lhl50mff"]
+
+[ext_resource type="Script" uid="uid://u0bw7t8pu0m2" path="res://scripts/warning.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://biaiujhm6xirb" path="res://fuentes_de_texto/WinkyRough-Black.ttf" id="2"]
+[ext_resource type="FontFile" uid="uid://bmg1fna5o62ek" path="res://fuentes_de_texto/WinkyRough-Light.ttf" id="3"]
+
+[sub_resource type="Animation" id="Animation_nw5su"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("warning_text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("description:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aw62g"]
+resource_name = "fade"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("warning_text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("description:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g2dyn"]
+_data = {
+&"RESET": SubResource("Animation_nw5su"),
+&"fade": SubResource("Animation_aw62g")
+}
+
+[node name="warning" type="Control" unique_id=501194071]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+wait_time = 8.0
+scene_path = "res://ui/main_menu.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=898794356]
+
+[node name="bg" type="ColorRect" parent="CanvasLayer" unique_id=1573785868]
+offset_right = 1156.0
+offset_bottom = 653.0
+color = Color(0, 0, 0, 1)
+
+[node name="warning_text" type="RichTextLabel" parent="CanvasLayer" unique_id=733130206]
+modulate = Color(1, 0, 0, 0)
+offset_top = 51.0
+offset_right = 1152.0
+offset_bottom = 375.0
+theme_override_fonts/normal_font = ExtResource("2")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]¡Atención!"
+
+[node name="description" type="RichTextLabel" parent="CanvasLayer" unique_id=1631667606]
+modulate = Color(1, 1, 1, 0)
+offset_top = 182.0
+offset_right = 1152.0
+offset_bottom = 563.0
+theme_override_fonts/normal_font = ExtResource("3")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[center]Este es un juego de terror. Si tienes alguna condición de salud que pueda afectarte de cualquier manera, considera no jugar."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=1890592434]
+libraries/ = SubResource("AnimationLibrary_g2dyn")

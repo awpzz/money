@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://63ex58q4ws34"]
+
+[ext_resource type="Texture2D" uid="uid://dnwcqi1aynd4t" path="res://texturas/piedra.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://b806gyuptsa73" path="res://texturas/stone_normalmap.png" id="2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jstad"]
+cull_mode = 2
+albedo_texture = ExtResource("1")
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ir0g6"]
+radial_segments = 24
+cap_top = false
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8t03b"]
+size = Vector3(1, 1.19, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ml0k7"]
+radial_segments = 24
+
+[sub_resource type="BoxMesh" id="BoxMesh_0o1u6"]
+
+[node name="bin" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.543864, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jstad")
+mesh = SubResource("CylinderMesh_ir0g6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0338966, 0)
+shape = SubResource("BoxShape3D_8t03b")
+
+[node name="lid" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="lid"]
+transform = Transform3D(1.1, 0, 0, 0, -0.098, 1.66095e-07, 0, -1.47976e-08, -1.1, 0, 0.452656, -4.54319e-08)
+material_override = SubResource("StandardMaterial3D_jstad")
+mesh = SubResource("CylinderMesh_ir0g6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="lid"]
+transform = Transform3D(0.5, 0, 0, 0, 0.061, 0, 0, 0, 0.5, 0, 0.574561, 0)
+material_override = SubResource("StandardMaterial3D_jstad")
+mesh = SubResource("CylinderMesh_ml0k7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="lid"]
+transform = Transform3D(0.17761, 0, 0, 0, 0.0918021, 0, 0, 0, 1.4523, 0, 0.415831, 0)
+material_override = SubResource("StandardMaterial3D_jstad")
+mesh = SubResource("BoxMesh_0o1u6")
+skeleton = NodePath("../..")

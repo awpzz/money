@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://7h4qytqu4mkx"]
+
+[ext_resource type="Texture2D" uid="uid://3ndokauof4o3" path="res://texturas/wood.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bfdqtn0d0nmok" path="res://texturas/wood_normalmap.png" id="2"]
+
+[resource]
+albedo_texture = ExtResource("1")
+roughness = 0.7
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2")
+uv1_scale = Vector3(3.975, 2, 1)

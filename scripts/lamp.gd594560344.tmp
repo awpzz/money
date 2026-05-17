@@ -1,0 +1,31 @@
+extends Node3D
+
+@export var on = false
+@export var on_mat: StandardMaterial3D
+@export var off_mat: StandardMaterial3D
+@export var light_color: Color
+@export var reflection_probe: ReflectionProbe
+
+func _ready() -> void :
+    $OmniLight3D.light_color = light_color
+    if on:
+        $lamp_head.material_override = on_mat
+    if !on:
+        $lamp_head.material_override = off_mat
+    $OmniLight3D.visible = on
+
+func toggle_light():
+    on = !on
+    if on:
+        $sound.pitch_scale = 1.0
+        $lamp_head.material_override = on_mat
+    if !on:
+        $sound.pitch_scale = 0.8
+        $lamp_head.material_override = off_mat
+    $sound.play()
+    $OmniLight3D.visible = on
+    await get_tree().create_timer(0.05, false).timeout
+    if !on:
+        reflection_probe.origin_offset.x += 0.01
+    elif on:
+        reflection_probe.origin_offset.x -= 0.01

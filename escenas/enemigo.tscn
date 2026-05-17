@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://dv2yij7ygr4b1"]
+
+[ext_resource type="Script" uid="uid://c7lqguevjc5u6" path="res://scripts/enemy.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://deps7m75ump62" path="res://sonidos/carpet_footstep.mp3" id="2"]
+[ext_resource type="AudioStream" uid="uid://dnvtcgyhsswt2" path="res://sonidos/carpet_footstep2.mp3" id="3"]
+[ext_resource type="AudioStream" uid="uid://bj5fjkb5fs130" path="res://sonidos/carpet_footstep3.mp3" id="4"]
+[ext_resource type="AudioStream" uid="uid://bikdcir7wwyvx" path="res://sonidos/carpet_footstep4.mp3" id="5"]
+[ext_resource type="PackedScene" uid="uid://c4pupfuwjdgyh" path="res://escenas/monstruo_enemigo.tscn" id="6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a7odr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7xeo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h342l"]
+
+[node name="enemy" type="CharacterBody3D"]
+floor_max_angle = 1.13446
+script = ExtResource("1")
+footstep_sounds = [ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00444, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_a7odr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00444, 0)
+shape = SubResource("CapsuleShape3D_g7xeo")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+radius = 1.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.301474, 0, 0, 0, 1, 0, 1.54617, -0.741832)
+visible = false
+mesh = SubResource("BoxMesh_h342l")
+
+[node name="chasecast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.28602, -0.458044)
+target_position = Vector3(0, -10, 0)
+collision_mask = 3
+
+[node name="killcast" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438037, 0)
+
+[node name="killcast" type="RayCast3D" parent="killcast"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+enabled = false
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 3
+
+[node name="chasecast2" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.28602, -0.458044)
+target_position = Vector3(5, -10, 0)
+collision_mask = 3
+
+[node name="chasecast3" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.28602, -0.458044)
+target_position = Vector3(-5, -10, 0)
+collision_mask = 3
+
+[node name="chasecast4" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.28602, -0.458044)
+target_position = Vector3(-2.5, -10, 0)
+collision_mask = 3
+
+[node name="chasecast5" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.28602, -0.458044)
+target_position = Vector3(2.5, -10, 0)
+collision_mask = 3
+
+[node name="monster_enemy" parent="." instance=ExtResource("6")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.750774, 0)
+
+[node name="upper_r_arm" parent="monster_enemy/body" index="0"]
+transform = Transform3D(0.702488, 0.711695, 0, -0.711695, 0.702489, 0, 0, 0, 1, 0.43166, -0.199996, 0)
+
+[node name="jumpscare_cam" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 1.50418, -0.935015)
+
+[node name="feet" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0861492, 0)
+stream = ExtResource("2")
+max_distance = 30.0
+bus = &"SFX"
+
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="compute_velocity"]
+
+[editable path="monster_enemy"]
